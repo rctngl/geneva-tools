@@ -1,5 +1,10 @@
-tool:
+info:
   name: "Fluke 3000FC"
+  version: 1
+  date: "28/6/2024"
+  maintainer: "Alex Mills"
+
+tool: 
   services: 
 
     - uuid: "0000180a-0000-1000-8000-00805f9b34fb"

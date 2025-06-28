@@ -1,5 +1,7 @@
 tools:
-  - name: "Fluke 3000FC"
-    official: false
-    maintainer: alexmills
-    url: "https://github.com/rctngl/geneva-tools/raw/main/unofficial/3000FC.yaml"
+  official:
+  
+  unofficial:
+    - url: "https://github.com/rctngl/geneva-tools/raw/main/unofficial/3000FC.yaml"
+
+  contributed:
