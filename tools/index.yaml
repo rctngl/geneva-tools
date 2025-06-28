@@ -2,6 +2,6 @@ tools:
   official:
   
   unofficial:
-    - url: "https://github.com/rctngl/geneva-tools/raw/main/unofficial/3000FC.yaml"
+    - path: "3000FC.yaml"
 
   contributed:
