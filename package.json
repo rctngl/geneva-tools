@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "npx wrangler dev"
+    "start": "npx wrangler dev --env development"
   },
   "devDependencies": {
     "wrangler": "^4.22.0"
