@@ -7,7 +7,7 @@ export default class extends WorkerEntrypoint<Env> {
     const assetResponse = await this.env.ASSETS.fetch(request);
 
     // Add CORS Headers
-    return new Response(assetResponse, {
+    return new Response(assetResponse.body, {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
