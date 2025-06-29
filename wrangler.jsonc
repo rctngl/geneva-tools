@@ -1,7 +1,9 @@
 {
   "name": "geneva-tools",
   "compatibility_date": "2025-06-28",
+  "main": "./worker/index.ts",
   "assets": {
-    "directory": "./tools"
+    "directory": "./tools",
+    "run_worker_first": true
   }
 }
