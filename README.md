@@ -1,2 +1,18 @@
-# geneva-tools
-Tool definitions for the Rectangle Web App
+# Geneva Tools
+Tool definitions API for the Rectangle Web App.
+
+Hosted at https://tools.rctngl.au using cloudflare workers.
+
+## To Run Locally
+
+```
+// Install Wrangler
+npm intall
+
+// Run Local Worker Simulator
+npm run
+```
+
+
+
+
