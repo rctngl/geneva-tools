@@ -10,8 +10,8 @@ export default class extends WorkerEntrypoint<Env> {
     return new Response(assetResponse.body, {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
-        "Access-Control-Max-Age": "86400",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Max-Age": "600",
       }
     });
 
