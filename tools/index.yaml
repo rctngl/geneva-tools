@@ -1,7 +1,6 @@
-tools:
-  official:
+official:
   
-  unofficial:
-    - path: "3000FC.yaml"
+unofficial:
+  - path: "3000FC.yaml"
 
-  contributed:
+contributed:
