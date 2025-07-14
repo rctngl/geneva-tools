@@ -4,8 +4,22 @@ info:
   date: "28/6/2024"
   maintainer: "Alex Mills"
 
-tool: 
-  services: 
+bluetooth: 
+  services:
+    - uuid: 0x180F
+      name: "Battery Service"
+      characteristics:
+        - uuid: 0x2A19
+          name: "Battery Level"
+          properties:
+            read: true
+            notify: true
+          packet_format:
+            fields:
+              - name: "level"
+                offset: 0
+                length: 0
+                type: "unit8"
 
     - uuid: "0000180a-0000-1000-8000-00805f9b34fb"
       name: "Device Info"
@@ -14,16 +28,79 @@ tool:
           name: "Brand"
           properties:
             read: true
+          packet_format:
+            fields:
+              - name: "brand"
+                offset: 0
+                length: 0
+                type: "utf8"
+
         - uuid: "00002a24-0000-1000-8000-00805f9b34fb"
           name: "Model"
           properties:
             read: true
+          packet_format:
+            fields:
+              - name: "model"
+                offset: 0
+                length: 0
+                type: "utf8"
+    
+    - uuid: "B6981801-7562-11E2-B50D-00163E46F8FE"
+      name: "Module ID Service"
+      characteristics:
+        - uuid: "B6982902-7562-11E2-B50D-00163E46F8FE"
+          name: "Module ID Number"
+          properties:
+            read: true
+            write: true
+          write:
+            // Stuff here to describe how to write
+          packet_format:
+            fields:
+              - name: "id"
+                offset: 0
+                length: 0
+                type: "unit8"
 
     - uuid: "b6981800-7562-11e2-b50d-00163e46f8fe"
       name: "Measure Service"
+      isPrimary: true
       characteristics:
         - uuid: "b698290f-7562-11e2-b50d-00163e46f8fe"
           name: "Measurement"
           properties:
             read: true
             notify: true
+
+          packet_format:
+            fields:
+              - name: "state"
+                offset: 4
+                length: 1
+                type: "unit8"
+                map:
+                  0: "Normal"
+                  1: "Blank"
+                  2: "Inactive"
+                  3: "----"
+                display:
+                  label: "Display Status"
+
+ui:
+  components:
+    - type: "dmm"
+      title: "Mulitmeter"
+
+    - type: "battery"
+      field: "battery_level"
+
+    - type: "value_list"
+      title: ""
+      fields: ["state", "battery_level"]
+
+    - type: "fconnect_id"
+      title: "Fluke Connect ID"
+      default: 1
+      field: "id"
+              

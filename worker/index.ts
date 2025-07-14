@@ -17,6 +17,11 @@ export default class extends WorkerEntrypoint<Env> {
     // Fetch Asset
     const assetResponse = await this.env.ASSETS.fetch(request)
 
+    // Return bad request if asset fetch failed 
+    if (assetResponse.ok == false) {
+      return assetResponse
+    }
+
     // Add CORS Headers for local development
     return new Response(assetResponse.body, {
       headers: {
