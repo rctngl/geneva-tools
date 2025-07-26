@@ -16,7 +16,7 @@ export default class extends WorkerEntrypoint<Env> {
     
     // Determine request origin
     const origin = request.headers.get('origin')
-    console.log({origin: origin, env: this.env.APP_URL})
+    console.log({origin_request: origin, env_app_name: this.env.APP_URL})
 
     // Fetch Asset
     const assetResponse = await this.env.ASSETS.fetch(request)
