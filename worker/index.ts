@@ -25,6 +25,7 @@ export default class extends WorkerEntrypoint<Env> {
     // If not local dev or production app, block.
     // Revisit this in the future... seems a bit overkill...
     const origin = request.headers.get('origin')
+    console.log({origin: origin, env: this.env.APP_URL})
 
     if (origin !== this.env.APP_URL) {
       return new Response(null, {
