@@ -6,62 +6,54 @@ info:
 
 bluetooth: 
   services:
-    - uuid: 0x180F
+    - uuid: "battery_service"
       name: "Battery Service"
       characteristics:
-        - uuid: 0x2A19
+        - uuid: "battery_level"
           name: "Battery Level"
-          properties:
-            read: true
-            notify: true
           packet_format:
             fields:
-              - name: "level"
+              - id: "battery_level"
                 offset: 0
                 length: 0
-                type: "unit8"
+                type: "uint8"
 
     - uuid: "0000180a-0000-1000-8000-00805f9b34fb"
       name: "Device Info"
       characteristics:
         - uuid: "00002a29-0000-1000-8000-00805f9b34fb"
           name: "Brand"
-          properties:
-            read: true
           packet_format:
             fields:
-              - name: "brand"
+              - id: "device_brand"
                 offset: 0
                 length: 0
                 type: "utf8"
 
         - uuid: "00002a24-0000-1000-8000-00805f9b34fb"
           name: "Model"
-          properties:
-            read: true
           packet_format:
             fields:
-              - name: "model"
+              - id: "device_model"
                 offset: 0
                 length: 0
                 type: "utf8"
     
-    - uuid: "B6981801-7562-11E2-B50D-00163E46F8FE"
+    - uuid: "b6981801-7562-11e2-b50d-00163e46f8fe"
       name: "Module ID Service"
       characteristics:
-        - uuid: "B6982902-7562-11E2-B50D-00163E46F8FE"
+        - uuid: "b6982902-7562-11e2-b50d-00163e46f8fe"
           name: "Module ID Number"
-          properties:
-            read: true
-            write: true
           write:
-            // Stuff here to describe how to write
+            // Details for writing...
           packet_format:
             fields:
-              - name: "id"
+              - id: "module_id"
                 offset: 0
                 length: 0
-                type: "unit8"
+                type: "uint8"
+                display:
+                  label: "Module ID Number"
 
     - uuid: "b6981800-7562-11e2-b50d-00163e46f8fe"
       name: "Measure Service"
@@ -69,16 +61,17 @@ bluetooth:
       characteristics:
         - uuid: "b698290f-7562-11e2-b50d-00163e46f8fe"
           name: "Measurement"
-          properties:
-            read: true
-            notify: true
-
           packet_format:
             fields:
-              - name: "state"
-                offset: 4
-                length: 1
-                type: "unit8"
+              - id: "value"
+                offset: 0
+                length: 21
+                type: "uint16"
+
+              - id: "state"
+                offset: 21
+                length: 4
+                type: "uint8"
                 map:
                   0: "Normal"
                   1: "Blank"
@@ -86,6 +79,13 @@ bluetooth:
                   3: "----"
                 display:
                   label: "Display Status"
+
+              - id: "function"
+                offset: 40
+                length: 8
+                type: "int8"
+                display:
+                  label: "Measurement Mode"
 
 ui:
   components:
