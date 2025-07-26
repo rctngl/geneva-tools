@@ -14,6 +14,10 @@ import { WorkerEntrypoint } from "cloudflare:workers"
 export default class extends WorkerEntrypoint<Env> {
   async fetch(request: Request) {
     
+    // Determine request origin
+    const origin = request.headers.get('origin')
+    console.log({origin: origin, env: this.env.APP_URL})
+
     // Fetch Asset
     const assetResponse = await this.env.ASSETS.fetch(request)
 
@@ -24,9 +28,6 @@ export default class extends WorkerEntrypoint<Env> {
 
     // If not local dev or production app, block.
     // Revisit this in the future... seems a bit overkill...
-    const origin = request.headers.get('origin')
-    console.log({origin: origin, env: this.env.APP_URL})
-
     if (origin !== this.env.APP_URL) {
       return new Response(null, {
         status: 400
