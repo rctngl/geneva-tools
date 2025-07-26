@@ -22,6 +22,16 @@ export default class extends WorkerEntrypoint<Env> {
       return assetResponse
     }
 
+    // If not local dev or production app, block.
+    // Revisit this in the future... seems a bit overkill...
+    const origin = request.headers.get('origin')
+
+    if (origin !== this.env.APP_URL) {
+      return new Response(null, {
+        status: 400
+      })
+    } 
+
     // Add CORS Headers for local development
     return new Response(assetResponse.body, {
       headers: {

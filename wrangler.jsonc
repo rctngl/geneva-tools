@@ -6,16 +6,19 @@
     "port": 4201
   },
   "vars": {
-    "ENVIRONMENT": "production"
+    "ENVIRONMENT": "production",
+    "APP_URL": "https://app.rctngl.au"
   },
   "assets": {
     "directory": "./tools",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "run_worker_first": true
   },
   "env": {
     "development": {
       "vars": {
-        "ENVIRONMENT": "development"
+        "ENVIRONMENT": "development",
+        "APP_URL": "http://localhost:4200"
       },
       "assets": {
         "directory": "./tools",

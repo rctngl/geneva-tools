@@ -13,6 +13,6 @@ npm intall
 npm run
 ```
 
-
+This will start a server at `localhost:4021` with CORS headers enabled for local development. 
 
 
