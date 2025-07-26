@@ -14,34 +14,18 @@ import { WorkerEntrypoint } from "cloudflare:workers"
 export default class extends WorkerEntrypoint<Env> {
   async fetch(request: Request) {
     
-    // Determine request origin
-    const origin = request.headers.get('origin')
-    console.log({origin_request: origin, env_app_name: this.env.APP_URL})
-
     // Fetch Asset
     const assetResponse = await this.env.ASSETS.fetch(request)
 
-    // Return bad request if asset fetch failed 
-    if (assetResponse.ok == false) {
-      return assetResponse
-    }
+    // Close response so that it is no longer immutable
+    const response = new Response(assetResponse.body, assetResponse)
 
-    // If not local dev or production app, block.
-    // Revisit this in the future... seems a bit overkill...
-    if (origin !== this.env.APP_URL) {
-      return new Response(null, {
-        status: 400
-      })
-    } 
+    // Add CORS headers
+    response.headers.append("Access-Control-Allow-Origin","*")
+    response.headers.append("Access-Control-Allow-Methods","GET")
+    response.headers.append("Access-Control-Max-Age","600")
 
-    // Add CORS Headers for local development
-    return new Response(assetResponse.body, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Max-Age": "600",
-      }
-    })
+    return response
 
   }
 }
